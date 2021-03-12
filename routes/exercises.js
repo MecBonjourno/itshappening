@@ -12,10 +12,9 @@ let Exercise = require('../models/exercise.model');
         const description = req.body.description
         const insta = req.body.insta
         const twitter = req.body.twitter
-        // const duration = Number(req.body.duration)
-        // const date = Date.parse(req.body.date)
+        const connections = req.body.connections
 
-        const newExercise = new Exercise({username, description, insta, twitter});
+        const newExercise = new Exercise({username, description, insta, twitter, connections});
 
         newExercise.save()
             .then(() => res.json("New Exercise Added"))
@@ -34,18 +33,23 @@ let Exercise = require('../models/exercise.model');
         .catch(err => res.status(400).json('Error: ' + err))
     })
 
-    router.route('/update/:id').post((req,res) => {
+    router.route('/update/:id').put((req,res) => {
         Exercise.findById(req.params.id)
           .then( exercise => {
         exercise.username = req.body.username
         exercise.description = req.body.description
         exercise.insta = req.body.insta
         exercise.twitter = req.body.twitter
-        // exercise.duration = Number(req.body.duration)
-        // exercise.date = Date.parse(req.body.date)
- 
+        
+        const addConnections = exercise.connections
+            console.log(addConnections)
+        addConnections.push( req.body.connections)
+        
+
+        console.log("deu isso: "+addConnections)
+
         exercise.save()
-            .then(() => res.json("Exercise Updated"))
+            .then(() => res.json("Exercise Updated "))
             .catch(err => res.status(400).json('Error: ' + err))
         })
         .catch(err => res.status(400).json('Error: ' + err))

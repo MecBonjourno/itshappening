@@ -83,7 +83,6 @@ export default class CreateExercise extends Component{
       description: this.state.description,
       insta: this.state.insta,
       twitter: this.state.twitter,
-      // date: this.state.date,
     }
 
     console.log(exercise)

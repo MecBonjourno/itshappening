@@ -8,9 +8,6 @@ const userSchema = new Schema({
         required: true,
         unique: true,
         trim: true,
-        insta: 'string',
-        twitter: 'string',
-        // twitter: 'string',
     },
 },{
     timestamps: true,

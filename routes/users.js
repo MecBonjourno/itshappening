@@ -7,30 +7,20 @@ router.route('/').get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err))
     });
 
-    router.route('/add').post((req,res) => {
-        const username = req.body.username
+router.route('/add').post((req,res) => {
+    const username = req.body.username
 
-        const newUser = new User({username});
+    const newUser = new User({username});
 
-        newUser.save()
-            .then(() => res.json("New User Added"))
-            .catch(err => res.status(400).json('Error: ' + err))
-    })
+    newUser.save()
+        .then(() => res.json("New User Added"))
+        .catch(err => res.status(400).json('Error: ' + err))
+})
 
 router.route('/:username').get((req, res) => {
     User.find({"username": req.params.username})
         .then(user =>  res.json(user))
         .catch(err => res.status(400).json('Error: ' + err))
     });
-
-    router.route('/add').post((req,res) => {
-        const username = req.body.username
-
-        const newUser = new User({username});
-
-        newUser.save()
-            .then(() => res.json("New User Added"))
-            .catch(err => res.status(400).json('Error: ' + err))
-    })
 
 module.exports = router;
